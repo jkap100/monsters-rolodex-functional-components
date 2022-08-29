@@ -37,7 +37,16 @@ class App extends Component {
           className="search-box"
           type="search"
           placeholder="search monsters"
-          onChange={() => {}}
+          onChange={(e) => {
+            const searchStr = e.target.value.toLocaleLowerCase();
+            const filteredMonsters = this.state.monsters.filter((monster) => {
+              return monster.name.toLocaleLowerCase().includes(e.target.value);
+            });
+
+            this.setState(() => {
+              return { monsters: filteredMonsters };
+            });
+          }}
         ></input>
         {this.state.monsters.map((monster) => {
           return <h1 key={monster.id}>{monster.name}</h1>;
